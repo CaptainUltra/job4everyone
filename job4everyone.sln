@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30002.166
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.438
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "job4everyone.Web", "job4everyone.Web\job4everyone.Web.csproj", "{A70D5701-272F-4952-85C2-07CC512C0DDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "job4everyone.Web", "job4everyone.Web\job4everyone.Web.csproj", "{A70D5701-272F-4952-85C2-07CC512C0DDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "job4everyone.Models", "job4everyone.Models\job4everyone.Models.csproj", "{C908A24B-76CC-480C-9FCF-FF231674A570}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "job4everyone.Data", "job4everyone.Data\job4everyone.Data.csproj", "{3C218173-BF2B-4D10-8097-EDB30B0B88A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{A70D5701-272F-4952-85C2-07CC512C0DDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A70D5701-272F-4952-85C2-07CC512C0DDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A70D5701-272F-4952-85C2-07CC512C0DDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C908A24B-76CC-480C-9FCF-FF231674A570}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C908A24B-76CC-480C-9FCF-FF231674A570}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C908A24B-76CC-480C-9FCF-FF231674A570}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C908A24B-76CC-480C-9FCF-FF231674A570}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C218173-BF2B-4D10-8097-EDB30B0B88A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C218173-BF2B-4D10-8097-EDB30B0B88A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C218173-BF2B-4D10-8097-EDB30B0B88A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C218173-BF2B-4D10-8097-EDB30B0B88A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
