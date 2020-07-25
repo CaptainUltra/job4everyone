@@ -4,9 +4,9 @@ using System.Text;
 
 namespace job4everyone.Models
 {
-    public class Advertisements
+    public class Advertisement
     {
-        public Advertisements()
+        public Advertisement()
         {
             this.CreatedAt = DateTime.UtcNow;
             this.UpdatedAt = DateTime.UtcNow;
@@ -16,8 +16,8 @@ namespace job4everyone.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public bool Active { get; set; }
-        public JobPositions JobPositionId { get; set; }
-        public Employers EmployerId { get; set; }
+        public JobPosition JobPositionId { get; set; }
+        public Employer EmployerId { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }
