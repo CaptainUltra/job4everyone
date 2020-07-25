@@ -23,5 +23,6 @@ namespace job4everyone.Models
         public JobPosition JobPosition { get; set; }
         public int EmployerId { get; set; }
         public Employer Employer { get; set; }
+        public List<AdvertisementCandidate> Candidates { get; set; }
     }
 }

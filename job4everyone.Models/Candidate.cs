@@ -17,5 +17,7 @@ namespace job4everyone.Models
         public string LastName { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+
+        public List<AdvertisementCandidate> Advertisements { get; set; }
     }
 }
