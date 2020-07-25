@@ -16,9 +16,12 @@ namespace job4everyone.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public bool Active { get; set; }
-        public JobPosition JobPositionId { get; set; }
-        public Employer EmployerId { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+
+        public int JobPositionId { get; set; }
+        public JobPosition JobPosition { get; set; }
+        public int EmployerId { get; set; }
+        public Employer Employer { get; set; }
     }
 }
