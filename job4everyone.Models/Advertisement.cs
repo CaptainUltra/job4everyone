@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace job4everyone.Models
@@ -13,7 +15,10 @@ namespace job4everyone.Models
             this.Active = false;
         }
         public int Id { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(200)")]
         public string Name { get; set; }
+        [Required]
         public string Description { get; set; }
         public bool Active { get; set; }
         public DateTime CreatedAt { get; set; }

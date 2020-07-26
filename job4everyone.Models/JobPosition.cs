@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace job4everyone.Models
@@ -12,6 +13,7 @@ namespace job4everyone.Models
             this.UpdatedAt = DateTime.UtcNow;
         }
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
