@@ -8,6 +8,7 @@ namespace job4everyone.Data
 {
     public class Job4EveryoneDbContext : DbContext
     {
+
         public Job4EveryoneDbContext(DbContextOptions<Job4EveryoneDbContext> options)
             : base(options)
         { }
@@ -43,5 +44,6 @@ namespace job4everyone.Data
 
             base.OnModelCreating(modelBuilder);
         }
+
     }
 }
