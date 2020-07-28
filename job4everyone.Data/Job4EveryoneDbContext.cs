@@ -1,4 +1,5 @@
 ﻿using job4everyone.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace job4everyone.Data
 {
-    public class Job4EveryoneDbContext : DbContext
+    public class Job4EveryoneDbContext : IdentityDbContext<Employer>
     {
 
         public Job4EveryoneDbContext(DbContextOptions<Job4EveryoneDbContext> options)

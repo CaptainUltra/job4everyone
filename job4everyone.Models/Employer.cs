@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
+using Microsoft.AspNetCore.Identity;
 
 namespace job4everyone.Models
 {
-    public class Employer
+    public class Employer : IdentityUser
     {
         public Employer()
         {
