@@ -13,9 +13,7 @@ namespace job4everyone.Models
             this.CreatedAt = DateTime.UtcNow;
             this.UpdatedAt = DateTime.UtcNow;
         }
-        public int Id { get; set; }
-        [Required]
-        public string Email { get; set; }
+
         [Required]
         public string Name { get; set; }
         [Required]
