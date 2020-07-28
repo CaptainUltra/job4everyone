@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using job4everyone.Models;
 using Microsoft.AspNetCore.Authorization;
 
 using Microsoft.AspNetCore.Identity;
@@ -16,10 +17,10 @@ namespace job4everyone.Web.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public abstract class ResendEmailConfirmationModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<Employer> _userManager;
         private readonly IEmailSender _emailSender;
 
-        public ResendEmailConfirmationModel(UserManager<IdentityUser> userManager, IEmailSender emailSender)
+        public ResendEmailConfirmationModel(UserManager<Employer> userManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;
