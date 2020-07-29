@@ -33,6 +33,11 @@ namespace job4everyone.Web.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Company name")]
+            public string CompanyName { get; set; }
+
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
@@ -47,6 +52,7 @@ namespace job4everyone.Web.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
+                CompanyName = user.CompanyName,
                 PhoneNumber = phoneNumber
             };
         }
@@ -87,6 +93,13 @@ namespace job4everyone.Web.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
+
+            if (Input.CompanyName != user.CompanyName)
+            {
+                user.CompanyName = Input.CompanyName;
+            }
+
+            await _userManager.UpdateAsync(user);
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
