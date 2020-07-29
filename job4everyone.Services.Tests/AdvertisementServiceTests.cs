@@ -6,6 +6,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace job4everyone.Services.Tests
@@ -76,6 +77,31 @@ namespace job4everyone.Services.Tests
 
             var ex = Assert.Throws<ArgumentException>(() => service.CreateAdvertisement("Advertisement1", "An advertisement for a job.", true, this.jobPositionId, "Employer2"));
             Assert.That(ex.Message, Is.EqualTo("Invalid employer user name. (Parameter 'employerUserName')"));
+        }
+        [Test]
+        public void Advertisement_ActiveIsSetToFalse_WhenThereAre10AlreadyActiveForThatEmployer_Create()
+        {
+            var service = new AdvertisementService(context);
+            for (int i = 1; i <= 10; i++)
+            {
+                context.Advertisements.Add(new Advertisement { Name = "Advertisement1", Description = "An advertisement for a job.", Active = true, JobPositionId = this.jobPositionId, EmployerId = this.employerId });
+            }
+            this.context.SaveChanges();
+
+            var advertisement = service.CreateAdvertisement("Advertisement1", "An advertisement for a job.", true, this.jobPositionId, this.employerUserName);
+            Assert.IsFalse(advertisement.Active);
+        }
+        [Test]
+        public void Advertisement_TestSetAllToInactive()
+        {
+            var service = new AdvertisementService(context);
+            for (int i = 1; i <= 5; i++)
+            {
+                context.Advertisements.Add(new Advertisement { Name = "Advertisement1", Description = "An advertisement for a job.", Active = true, JobPositionId = this.jobPositionId, EmployerId = this.employerId });
+            }
+            this.context.SaveChanges();
+
+            Assert.AreEqual(0, this.context.Advertisements.Count(a => a.Active == true));
         }
         [Test]
         public void Advertisement_CanBeRetrieved()

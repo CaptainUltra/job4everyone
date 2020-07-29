@@ -51,7 +51,11 @@ namespace job4everyone.Services
                 throw new ArgumentException("Invalid employer user name.", "employerUserName");
             }
 
-            //TODO: Add check for 10 active
+            //Check if this employer already has 10 active advertisements. If so set this one to be inactive.
+            if(this.context.Advertisements.Count(a => a.EmployerId == employer.Id) >= 10)
+            {
+                active = false;
+            }    
 
             var advertisement = new Advertisement() { Name = name, Description = description, Active = active};
             advertisement.JobPosition = jobPosition;
