@@ -15,6 +15,7 @@ namespace job4everyone.Models
         }
         public int Id { get; set; }
         [Required]
+        [StringLength(30)]
         public string Name { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
