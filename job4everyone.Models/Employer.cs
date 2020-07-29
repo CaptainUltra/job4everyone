@@ -15,10 +15,8 @@ namespace job4everyone.Models
         }
 
         [Required]
-        public string Name { get; set; }
-        [Required]
-        [Column(TypeName = "varchar(32)")]
-        public string Password { get; set; }
+        [PersonalData]
+        public string CompanyName { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 
