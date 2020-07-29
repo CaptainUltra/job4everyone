@@ -12,7 +12,7 @@ namespace job4everyone.Services
     {
         List<Advertisement> GetAdvertisementsList();
         Advertisement GetAdvertisement(int id);
-        Advertisement CreateAdvertisement(string name, string description, bool active, int jobPositionId);
+        Advertisement CreateAdvertisement(string name, string description, bool active, int jobPositionId, string employerUserName);
         Advertisement UpdateAdvertisement(int id, Advertisement advertisement);
         void DeleteAdvertisement(int id);
         void ChangeAllAdvertisementsToInactive();
@@ -37,16 +37,25 @@ namespace job4everyone.Services
             throw new NotImplementedException();
         }
 
-        public Advertisement CreateAdvertisement(string name, string description, bool active, int jobPositionId)
+        public Advertisement CreateAdvertisement(string name, string description, bool active, int jobPositionId, string employerUserName)
         {
             var jobPosition = this.context.JobPositions.FirstOrDefault(jp => jp.Id == jobPositionId);
             if (jobPosition == null)
             {
                 throw new ArgumentException("Invalid job position id.", "id");
             }
+
+            var employer = this.context.Employers.FirstOrDefault(e => e.UserName == employerUserName);
+            if(employer == null)
+            {
+                throw new ArgumentException("Invalid employer user name.", "employerUserName");
+            }
+
             //TODO: Add check for 10 active
+
             var advertisement = new Advertisement() { Name = name, Description = description, Active = active};
             advertisement.JobPosition = jobPosition;
+            advertisement.Employer = employer;
             this.context.Add(advertisement);
             this.context.SaveChanges();
 

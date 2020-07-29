@@ -15,6 +15,8 @@ namespace job4everyone.Services.Tests
         private DbContextOptions<Job4EveryoneDbContext> contextOptions;
         private Job4EveryoneDbContext context;
         private int jobPositionId;
+        private string employerUserName;
+        private string employerId;
 
         public AdvertisementServiceTests()
         {
@@ -28,9 +30,13 @@ namespace job4everyone.Services.Tests
         {
             this.context = new Job4EveryoneDbContext(this.contextOptions);
             var jobPosition = new JobPosition() { Name = "Job position" };
-            this.context.Add(jobPosition);
+            var employer = new Employer() { UserName = "Employer1" };
+            this.context.JobPositions.Add(jobPosition);
+            this.context.Employers.Add(employer);
             this.context.SaveChanges();
             this.jobPositionId = jobPosition.Id;
+            this.employerUserName = employer.UserName;
+            this.employerId = employer.Id;
         }
 
         [TearDown]
@@ -45,23 +51,32 @@ namespace job4everyone.Services.Tests
         {
             var service = new AdvertisementService(context);
 
-            var advertisement = service.CreateAdvertisement("Advertisement1", "An advertisement for a job.", true, this.jobPositionId);
+            var advertisement = service.CreateAdvertisement("Advertisement1", "An advertisement for a job.", true, this.jobPositionId, this.employerUserName);
 
             Assert.AreEqual("Advertisement1", advertisement.Name);
             Assert.AreEqual(1, advertisement.Id);
             Assert.AreEqual(1, context.Advertisements.Count());
             Assert.AreEqual(jobPositionId, advertisement.JobPositionId);
+            Assert.AreEqual(this.employerId, advertisement.EmployerId);
             Assert.IsNotNull(advertisement.JobPosition);
+            Assert.IsNotNull(advertisement.Employer);
         }
         [Test]
         public void AdvertisementWithInvalidJobPositionId_ThrowsException_WhenCreated()
         {
             var service = new AdvertisementService(context);
 
-            var ex = Assert.Throws<ArgumentException>(() => service.CreateAdvertisement("Advertisement1", "An advertisement for a job.", true, 2));
+            var ex = Assert.Throws<ArgumentException>(() => service.CreateAdvertisement("Advertisement1", "An advertisement for a job.", true, 2, this.employerUserName));
             Assert.That(ex.Message, Is.EqualTo("Invalid job position id. (Parameter 'id')"));
         }
-        
+        [Test]
+        public void AdvertisementWithInvalidEmployer_ThrowsException_WhenCreated()
+        {
+            var service = new AdvertisementService(context);
+
+            var ex = Assert.Throws<ArgumentException>(() => service.CreateAdvertisement("Advertisement1", "An advertisement for a job.", true, this.jobPositionId, "Employer2"));
+            Assert.That(ex.Message, Is.EqualTo("Invalid employer user name. (Parameter 'employerUserName')"));
+        }
         [Test]
         public void Advertisement_CanBeRetrieved()
         {
