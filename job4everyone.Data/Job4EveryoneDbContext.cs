@@ -1,4 +1,5 @@
 ﻿using job4everyone.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace job4everyone.Data
 {
-    public class Job4EveryoneDbContext : DbContext
+    public class Job4EveryoneDbContext : IdentityDbContext<Employer>
     {
         public Job4EveryoneDbContext(DbContextOptions<Job4EveryoneDbContext> options)
             : base(options)
@@ -28,6 +29,36 @@ namespace job4everyone.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            #region JobPosition seeding
+            modelBuilder.Entity<JobPosition>().HasData(
+                new JobPosition
+                {
+                    Id = 1,
+                    Name = "QA"
+                },
+                new JobPosition
+                {
+                    Id = 2,
+                    Name = "Developer"
+                },
+                new JobPosition
+                {
+                    Id = 3,
+                    Name = "Manager"
+                },
+                new JobPosition
+                {
+                    Id = 4,
+                    Name = "DevOps"
+                },
+                new JobPosition
+                {
+                    Id = 5,
+                    Name = "PM"
+                }
+            );
+            #endregion
+
             modelBuilder.Entity<AdvertisementCandidate>()
             .HasKey(x => new { x.AdvertisementId, x.CandidateId });
 
