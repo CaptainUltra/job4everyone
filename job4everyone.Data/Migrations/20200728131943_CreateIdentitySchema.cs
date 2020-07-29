@@ -24,8 +24,12 @@ namespace job4everyone.Data.Migrations
                 name: "Employers",
                 newName: "AspNetUsers");
 
+            migrationBuilder.DropColumn(
+                name: "EmployerId", 
+                table: "Advertisements");
+
             migrationBuilder.AddColumn<string>(
-                name: "EmployerId1",
+                name: "EmployerId",
                 table: "Advertisements",
                 nullable: true);
 
@@ -180,9 +184,9 @@ namespace job4everyone.Data.Migrations
                 values: new object[] { new DateTime(2020, 7, 28, 13, 19, 43, 96, DateTimeKind.Utc).AddTicks(1675), new DateTime(2020, 7, 28, 13, 19, 43, 96, DateTimeKind.Utc).AddTicks(1675) });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Advertisements_EmployerId1",
+                name: "IX_Advertisements_EmployerId",
                 table: "Advertisements",
-                column: "EmployerId1");
+                column: "EmployerId");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
@@ -201,9 +205,9 @@ namespace job4everyone.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Advertisements_AspNetUsers_EmployerId1",
+                name: "FK_Advertisements_AspNetUsers_EmployerId",
                 table: "Advertisements",
-                column: "EmployerId1",
+                column: "EmployerId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
@@ -212,15 +216,15 @@ namespace job4everyone.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Advertisements_AspNetUsers_EmployerId1",
+                name: "FK_Advertisements_AspNetUsers_EmployerId",
                 table: "Advertisements");
 
             migrationBuilder.DropTable(
                 name: "AspNetUserClaims");
 
-            
+
             migrationBuilder.DropIndex(
-                name: "IX_Advertisements_EmployerId1",
+                name: "IX_Advertisements_EmployerId",
                 table: "Advertisements");
 
             migrationBuilder.DropPrimaryKey(
@@ -236,7 +240,7 @@ namespace job4everyone.Data.Migrations
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
-                name: "EmployerId1",
+                name: "EmployerId",
                 table: "Advertisements");
 
             migrationBuilder.DropColumn(

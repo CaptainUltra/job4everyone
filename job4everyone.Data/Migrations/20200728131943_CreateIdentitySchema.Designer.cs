@@ -61,7 +61,7 @@ namespace job4everyone.Data.Migrations
                     b.Property<int>("EmployerId")
                         .HasColumnType("int");
 
-                    b.Property<string>("EmployerId1")
+                    b.Property<string>("EmployerId")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
 
                     b.Property<int>("JobPositionId")
@@ -76,7 +76,7 @@ namespace job4everyone.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployerId1");
+                    b.HasIndex("EmployerId");
 
                     b.HasIndex("JobPositionId");
 
@@ -278,7 +278,7 @@ namespace job4everyone.Data.Migrations
                 {
                     b.HasOne("job4everyone.Models.Employer", "Employer")
                         .WithMany("Advertisements")
-                        .HasForeignKey("EmployerId1");
+                        .HasForeignKey("EmployerId");
 
                     b.HasOne("job4everyone.Models.JobPosition", "JobPosition")
                         .WithMany("Advertisements")
