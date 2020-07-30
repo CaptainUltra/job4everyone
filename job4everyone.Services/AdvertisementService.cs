@@ -15,8 +15,8 @@ namespace job4everyone.Services
         Advertisement CreateAdvertisement(string name, string description, bool active, int jobPositionId, string employerUserName);
         Advertisement UpdateAdvertisement(int id, Advertisement advertisement);
         void DeleteAdvertisement(int id);
-        void ChangeAllAdvertisementsToInactive();
-        void ChangeLast10AdvertisementsToActive();
+        void ChangeAllAdvertisementsToInactive(string employerUserName);
+        void ChangeLast10AdvertisementsToActive(string employerUserName);
     }
 
     public class AdvertisementService : IAdvertisementService
@@ -27,14 +27,35 @@ namespace job4everyone.Services
         {
             this.context = context;
         }
-        public void ChangeAllAdvertisementsToInactive()
+        public void ChangeAllAdvertisementsToInactive(string employerUserName)
         {
-            throw new NotImplementedException();
+            var employer = this.context.Employers.FirstOrDefault(e => e.UserName == employerUserName);
+            if(employer == null)
+            {
+                throw new ArgumentException("Invalid employer user name.", "employerUserName");
+            }
+            var advertisements = this.context.Advertisements.Where(a => a.EmployerId == employer.Id);            foreach (var ad in advertisements)
+            {
+                ad.Active = false;
+            }
+
+            this.context.SaveChanges();
         }
 
-        public void ChangeLast10AdvertisementsToActive()
+        public void ChangeLast10AdvertisementsToActive(string employerUserName)
         {
-            throw new NotImplementedException();
+            var employer = this.context.Employers.FirstOrDefault(e => e.UserName == employerUserName);
+            if(employer == null)
+            {
+                throw new ArgumentException("Invalid employer user name.", "employerUserName");
+            }
+            this.ChangeAllAdvertisementsToInactive(employerUserName);
+            var advertisements = this.context.Advertisements.Where(a => a.EmployerId == employer.Id).OrderByDescending(a => a.Id).Take(10);            foreach (var ad in advertisements)
+            {
+                ad.Active = true;
+            }
+
+            this.context.SaveChanges();
         }
 
         public Advertisement CreateAdvertisement(string name, string description, bool active, int jobPositionId, string employerUserName)

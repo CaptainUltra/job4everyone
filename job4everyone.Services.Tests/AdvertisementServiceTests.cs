@@ -92,16 +92,56 @@ namespace job4everyone.Services.Tests
             Assert.IsFalse(advertisement.Active);
         }
         [Test]
-        public void Advertisement_TestSetAllToInactive()
+        public void AdvertisementOfASingleEmployer_TestSetAllToInactive()
         {
             var service = new AdvertisementService(context);
             for (int i = 1; i <= 5; i++)
             {
                 context.Advertisements.Add(new Advertisement { Name = "Advertisement1", Description = "An advertisement for a job.", Active = true, JobPositionId = this.jobPositionId, EmployerId = this.employerId });
             }
+            var employer = new Employer();
+            context.Employers.Add(employer);
+            var employerId = employer.Id;
+            context.Advertisements.Add(new Advertisement { Name = "Advertisement2", Description = "An advertisement for a job.", Active = true, JobPositionId = this.jobPositionId, EmployerId = employerId });
             this.context.SaveChanges();
 
-            Assert.AreEqual(0, this.context.Advertisements.Count(a => a.Active == true));
+            service.ChangeAllAdvertisementsToInactive(this.employerUserName);
+
+            Assert.AreEqual(1, this.context.Advertisements.Count(a => a.Active == true));
+        }
+        [Test]
+        public void AdvertisementOfASingleEmployer_SetAllToInactive_WithInvalidUserName_ThrowsException()
+        {
+            var service = new AdvertisementService(context);
+
+            var ex = Assert.Throws<ArgumentException>(() => service.ChangeAllAdvertisementsToInactive(""));
+            Assert.That(ex.Message, Is.EqualTo("Invalid employer user name. (Parameter 'employerUserName')"));
+        }
+        [Test]
+        public void AdvertisementOfASingleEmployer_TestSetLast10ToActive()
+        {
+            var service = new AdvertisementService(context);
+            for (int i = 1; i <= 10; i++)
+            {
+                context.Advertisements.Add(new Advertisement { Name = "Advertisement1", Description = "An advertisement for a job.", Active = false, JobPositionId = this.jobPositionId, EmployerId = this.employerId });
+            }
+            var employer = new Employer();
+            context.Employers.Add(employer);
+            var employerId = employer.Id;
+            context.Advertisements.Add(new Advertisement { Name = "Advertisement2", Description = "An advertisement for a job.", Active = false, JobPositionId = this.jobPositionId, EmployerId = employerId });
+            this.context.SaveChanges();
+
+            service.ChangeLast10AdvertisementsToActive(this.employerUserName);
+
+            Assert.AreEqual(1, this.context.Advertisements.Count(a => a.Active == false));
+        }
+        [Test]
+        public void AdvertisementOfASingleEmployer_SetLast10ToActive_WithInvalidUserName_ThrowsException()
+        {
+            var service = new AdvertisementService(context);
+
+            var ex = Assert.Throws<ArgumentException>(() => service.ChangeLast10AdvertisementsToActive(""));
+            Assert.That(ex.Message, Is.EqualTo("Invalid employer user name. (Parameter 'employerUserName')"));
         }
         [Test]
         public void Advertisement_CanBeRetrieved()
