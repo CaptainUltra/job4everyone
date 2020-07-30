@@ -110,6 +110,29 @@ namespace job4everyone.Services.Tests
             Assert.AreEqual(1, this.context.Advertisements.Count(a => a.Active == true));
         }
         [Test]
+        public void Advertisement_ReturnAllAdvertisementsByEmployer()
+        {
+            var service = new AdvertisementService(context);
+            context.Advertisements.Add(new Advertisement { Name = "Advertisement1", Description = "An advertisement for a job.", Active = true, JobPositionId = this.jobPositionId, EmployerId = this.employerId });
+            var employer = new Employer();
+            context.Employers.Add(employer);
+            var employerId = employer.Id;
+            context.Advertisements.Add(new Advertisement { Name = "Advertisement2", Description = "An advertisement for a job.", Active = true, JobPositionId = this.jobPositionId, EmployerId = employerId });
+            this.context.SaveChanges();
+
+            var advertisements = service.GetAdvertisementsListByEmployer(this.employerUserName);
+
+            Assert.AreEqual(1, advertisements.Count());
+        }
+        [Test]
+        public void Advertisement_ReturnAllAdvertisementsByEmployer_WithInvalidEmployerName_ThrowsException()
+        {
+            var service = new AdvertisementService(context);
+
+            var ex = Assert.Throws<ArgumentException>(() => service.GetAdvertisementsListByEmployer(""));
+            Assert.That(ex.Message, Is.EqualTo("Invalid employer user name. (Parameter 'employerUserName')"));
+        }
+        [Test]
         public void AdvertisementOfASingleEmployer_SetAllToInactive_WithInvalidUserName_ThrowsException()
         {
             var service = new AdvertisementService(context);

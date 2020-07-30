@@ -17,6 +17,7 @@ namespace job4everyone.Services
         void DeleteAdvertisement(int id);
         void ChangeAllAdvertisementsToInactive(string employerUserName);
         void ChangeLast10AdvertisementsToActive(string employerUserName);
+        List<Advertisement> GetAdvertisementsListByEmployer(string employerUserName);
     }
 
     public class AdvertisementService : IAdvertisementService
@@ -112,6 +113,18 @@ namespace job4everyone.Services
         public List<Advertisement> GetAdvertisementsList()
         {
             var list = this.context.Advertisements.ToList();
+            
+            return list;
+        }
+
+        public List<Advertisement> GetAdvertisementsListByEmployer(string employerUserName)
+        {
+            var employer = this.context.Employers.FirstOrDefault(e => e.UserName == employerUserName);
+            if(employer == null)
+            {
+                throw new ArgumentException("Invalid employer user name.", "employerUserName");
+            }
+            var list = this.context.Advertisements.Where(a => a.EmployerId == employer.Id).ToList();
             
             return list;
         }
