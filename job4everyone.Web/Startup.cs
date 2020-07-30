@@ -27,7 +27,7 @@ namespace job4everyone.Web
         {
             services.AddRazorPages();
             services.AddControllersWithViews();
-            //services.AddDbContext<Job4EveryoneDbContext>(options => options.UseMySql(Data.Configuration.ConnectionString));
+            services.AddDbContext<Job4EveryoneDbContext>(options => options.UseMySql(Data.Configuration.ConnectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
