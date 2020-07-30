@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using job4everyone.Data;
+using job4everyone.Models;
 
 namespace job4everyone.Services
 {
     public interface ICandidateService
     {
-        List<Candidate> GetCandidateList();
+        List<Candidate> GetCandidatesList();
         Candidate GetCandidate(int id);
         Candidate CreateCandidate(string firstName, string lastName, string email);
         Candidate UpdateCandidate(int id, Candidate candidate);
