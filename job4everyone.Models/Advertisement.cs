@@ -13,6 +13,7 @@ namespace job4everyone.Models
             this.CreatedAt = DateTime.UtcNow;
             this.UpdatedAt = DateTime.UtcNow;
             this.Active = false;
+            this.Candidates = new List<AdvertisementCandidate>();
         }
         public int Id { get; set; }
         [Required]

@@ -11,6 +11,7 @@ namespace job4everyone.Models
         {
             this.CreatedAt = DateTime.UtcNow;
             this.UpdatedAt = DateTime.UtcNow;
+            this.Advertisements = new List<AdvertisementCandidate>();
         }
         public int Id { get; set; }
         [Required]
