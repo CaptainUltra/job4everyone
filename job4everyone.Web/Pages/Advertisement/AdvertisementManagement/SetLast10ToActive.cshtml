@@ -1,0 +1,16 @@
+@page
+@model job4everyone.Web.Pages.Advertisement.AdvertisementManagement.SetLast10ToActive
+
+@{
+    ViewData["Title"] = "Set Last 10 To Active";
+}
+
+<h1>Set Last 10 ToActive</h1>
+
+<h3>Are you sure you want to set the last 10 of your advertisements to active? It will set all others to inactive.</h3>
+<div>   
+    <form method="post">
+        <input type="submit" value="Set last 10 to active" class="btn btn-danger" /> |
+        <a asp-page="/Advertisement/MyAdvertisements">Back to List</a>
+    </form>
+</div>

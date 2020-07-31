@@ -1,0 +1,12 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Active Advertisements Management";
+}
+
+<div class="text-center">
+    <h3 class="display-4">Active advertisements</h1>
+    <p>You can only have 10 active advertisements at the same time. The current advertisement is set to inactive. If you wish you may edit your active advertisements. For easier management we provide you these options:</p>
+    <p><a asp-page="/Advertisement/AdvertisementManagement/SetAllToInactive">Set All To Inactive</a></p>
+    <p><a asp-page="/Advertisement/AdvertisementManagement/SetLast10ToActive">Set Last 10 To Active (makes all others inactive)</a></p>
+</div>

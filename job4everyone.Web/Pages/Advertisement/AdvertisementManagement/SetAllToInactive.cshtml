@@ -1,0 +1,16 @@
+@page
+@model job4everyone.Web.Pages.Advertisement.AdvertisementManagement.SetAllToInactive
+
+@{
+    ViewData["Title"] = "Set All To Inactive";
+}
+
+<h1>Set All To Inactive</h1>
+
+<h3>Are you sure you want to set all of your advertisements to inactive?</h3>
+<div>   
+    <form method="post">
+        <input type="submit" value="Set all to inactive" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

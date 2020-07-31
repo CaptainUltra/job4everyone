@@ -1,5 +1,6 @@
 ﻿using job4everyone.Data;
 using job4everyone.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -124,7 +125,12 @@ namespace job4everyone.Services
             {
                 throw new ArgumentException("Invalid employer user name.", "employerUserName");
             }
-            var list = this.context.Advertisements.Where(a => a.EmployerId == employer.Id).ToList();
+            var list = this.context.Advertisements
+                .Where(a => a.EmployerId == employer.Id)
+                .Include(a => a.JobPosition)
+                .Include(a => a.Candidates)
+                .ThenInclude(c => c.Candidate)
+                .ToList();
             
             return list;
         }

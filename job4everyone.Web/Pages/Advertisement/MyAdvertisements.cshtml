@@ -1,16 +1,18 @@
 @page
 @using Microsoft.AspNetCore.Identity
-@model job4everyone.Web.Pages.Advertisement.IndexModel
+@model job4everyone.Web.Pages.Advertisement.MyAdvertisements
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "My Advertisements";
 }
 
-<h1>All Advertisements</h1>
+<h1>My Advertisements</h1>
 @if(User.Identity.IsAuthenticated)
 {
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create">Create New</a> | 
+    <a asp-page="/Advertisement/AdvertisementManagement/SetAllToInactive">Set All To Inactive</a> | 
+    <a asp-page="/Advertisement/AdvertisementManagement/SetLast10ToActive">Set Last 10 To Active (makes all others inactive)</a>
 </p>
 }
 <table class="table">
@@ -29,7 +31,7 @@
                 @Html.DisplayNameFor(model => model.Advertisement[0].JobPosition)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Advertisement[0].Employer)
+                Candidates
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Advertisement[0].UpdatedAt)
@@ -53,7 +55,7 @@
                 @Html.DisplayFor(modelItem => item.JobPosition.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Employer.CompanyName)
+                @item.Candidates.Count()
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UpdatedAt)
