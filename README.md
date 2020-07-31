@@ -1,12 +1,12 @@
-#job4everyone
+# job4everyone
 
-##Description
+## Description
 An ASP.NET web project for Musala Soft Internship.
-##Sample assginment
+## Sample assginment
 We want to have a job posting site that benefits both employers and candidates. An employer can publish as many advertisements as he wants, but only 10 are active at the same time. The ad is simple text (description), but there are categories for the type of profession: QA, Developer, Manager, DevOps, PM. The employer must have an account in the system. The applicant does not have an account, but if he / she decides to apply for a particular advertisement, a record must be created with the following characteristics: Names of the candidate and on which advertisement he / she applies. A candidate can apply on all the ads, but only once for each of them. Also make a reference (backend) that shows how many active listings we have by category and how many people have applied for each profession (QA, Developer, Manager, DevOps, PM).
-##Installation
+## Installation
 The installation can be done using the dotnet CLI.
-###Requirements
+### Requirements
 - .NET Core SDK/Runtime 3.1
 - MariaDB >10.4.13 (or MySQL)
 - ASP.NET Runtime 3.1
