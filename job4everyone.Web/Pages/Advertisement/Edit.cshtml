@@ -1,0 +1,47 @@
+@page
+@model job4everyone.Web.Pages.Advertisement.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Advertisement</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Advertisement.Id" />
+            <div class="form-group">
+                <label asp-for="Advertisement.Name" class="control-label"></label>
+                <input asp-for="Advertisement.Name" class="form-control" />
+                <span asp-validation-for="Advertisement.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Advertisement.Description" class="control-label"></label>
+                <input asp-for="Advertisement.Description" class="form-control" />
+                <span asp-validation-for="Advertisement.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Advertisement.Active" /> @Html.DisplayNameFor(model => model.Advertisement.Active)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Advertisement.JobPositionId" class="control-label">Job Position</label>
+                <select asp-for="Advertisement.JobPositionId" class="form-control" asp-items="ViewBag.JobPositionId"></select>
+                <span asp-validation-for="Advertisement.JobPositionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+

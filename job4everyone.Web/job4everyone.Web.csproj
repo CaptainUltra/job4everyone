@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\job4everyone.Data\job4everyone.Data.csproj" />
+    <ProjectReference Include="..\job4everyone.Services\job4everyone.Services.csproj" />
   </ItemGroup>
 
 </Project>
